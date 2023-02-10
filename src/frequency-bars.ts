@@ -5,12 +5,10 @@
  * @constructor
  */
 
-interface FrequencyBars {
-  canvas: HTMLCanvasElement;
-  canvasContext: CanvasRenderingContext2D | null;
-}
-
 class FrequencyBars {
+  private canvas: HTMLCanvasElement;
+  private canvasContext: CanvasRenderingContext2D | null;
+
   constructor(selector: any) {
     this.canvas = <HTMLCanvasElement>document.querySelector(selector);
     this.canvas.width = document.body.clientWidth;

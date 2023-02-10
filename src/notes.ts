@@ -1,21 +1,16 @@
-interface Notes {
-  tuner: any;
-  isAutoMode: boolean;
-  root: HTMLElement | null;
-  notesList: HTMLElement | null;
-  frequency: HTMLElement | null;
-  notes: HTMLDivElement[];
-  notesMap: { [x: string]: HTMLDivElement };
-  dataset: {
-    name: string;
-    frequency: number;
-    octave: number;
-    value: number;
-    cents: number;
-  };
-}
+import { noteProps } from "./type";
 
 class Notes {
+  public isAutoMode: boolean;
+
+  private tuner: any;
+  private root: HTMLElement | null;
+  private notesList: HTMLElement | null;
+  private frequency: HTMLElement | null;
+  private notes: HTMLDivElement[];
+  private notesMap: { [x: string]: HTMLDivElement };
+  private dataset!: noteProps;
+
   constructor(selector: any, tuner: any) {
     this.tuner = tuner;
     this.isAutoMode = true;
@@ -96,13 +91,7 @@ class Notes {
       active.classList.remove("active");
     }
   }
-  update(note: {
-    name: string;
-    frequency: number;
-    octave: number;
-    value: number;
-    cents: number;
-  }) {
+  update(note: noteProps) {
     if (note.value in this.notesMap) {
       this.active(this.notesMap[note.value]);
       this.frequency!.childNodes[0].textContent = parseFloat(

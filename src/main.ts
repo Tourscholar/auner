@@ -3,24 +3,17 @@ import FrequencyBars from "./frequency-bars";
 import Meter from "./meter";
 import Notes from "./notes";
 import Tuner from "./tuner";
-
-interface noteProps {
-  name: string;
-  frequency: number;
-  octave: number;
-  value: number;
-  cents: number;
-}
+import { noteProps } from "./type";
 
 class Application {
-  tuner: Tuner;
-  a4!: number;
-  notes: Notes;
-  meter: Meter;
-  frequencyBars: FrequencyBars;
-  $a4!: HTMLElement | null;
-  lastNote: any;
-  frequencyData: Uint8Array | undefined;
+  private tuner: Tuner;
+  private a4!: number;
+  private notes: Notes;
+  private meter: Meter;
+  private frequencyBars: FrequencyBars;
+  private $a4!: HTMLElement | null;
+  private lastNote: any;
+  private frequencyData: Uint8Array | undefined;
 
   constructor() {
     this.initA4();

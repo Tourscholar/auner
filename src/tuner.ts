@@ -6,22 +6,6 @@ declare global {
   }
 }
 
-interface Tuner {
-  middleA: number;
-  semitone: number;
-  bufferSize: number;
-  noteStrings: string[];
-  audioContext: any;
-  pitchDetector: any;
-  onNoteDetected: any;
-  oscillator: any;
-  analyser: {
-    connect: (arg0: (_scriptProcessor: any) => void) => void;
-    frequencyBinCount: Iterable<number>;
-    getByteFrequencyData: (arg0: Uint8Array | undefined) => void;
-  };
-}
-
 declare var navigator: any;
 navigator.getUserMedia =
   navigator.getUserMedia ||
@@ -29,6 +13,22 @@ navigator.getUserMedia =
   navigator.mozGetUserMedia;
 
 class Tuner {
+  public middleA: number;
+  public onNoteDetected: any;
+
+  private semitone: number;
+  private bufferSize: number;
+  private noteStrings: string[];
+  private audioContext: any;
+  private pitchDetector: any;
+  private oscillator: any;
+
+  public analyser!: {
+    connect: (arg0: (_scriptProcessor: any) => void) => void;
+    frequencyBinCount: Iterable<number>;
+    getByteFrequencyData: (arg0: Uint8Array | undefined) => void;
+  };
+
   constructor(a4: number) {
     this.middleA = a4 || 440;
     this.semitone = 69;

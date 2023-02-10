@@ -3,12 +3,10 @@
  * @constructor
  */
 
-interface Meter {
-  root: HTMLElement;
-  pointer: HTMLElement | null;
-}
-
 class Meter {
+  private root: HTMLElement;
+  private pointer: HTMLElement | null;
+
   constructor(selector: any) {
     this.root = document.querySelector(selector);
     this.pointer = this.root.querySelector(".meter-pointer");
