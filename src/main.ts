@@ -47,7 +47,7 @@ class Application {
       }
     };
 
-    Swal.fire("Welcome to tuner!").then(function () {
+    Swal.fire("Welcome to Auner!").then(function () {
       self.tuner.init();
       self.frequencyData = new Uint8Array(
         self.tuner.analyser.frequencyBinCount
