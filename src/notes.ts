@@ -68,7 +68,7 @@ class Notes {
           // @ts-ignore
           $active.classList.remove("active");
         } else {
-          self.tuner.play(this.dataset.frequency);
+          self.tuner.playNote(this.dataset.frequency);
           //@ts-ignore
           self.update(note.dataset);
         }

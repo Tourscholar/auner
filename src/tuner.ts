@@ -21,7 +21,7 @@ class Tuner {
   private noteStrings: string[];
   private audioContext: any;
   private pitchDetector: any;
-  private oscillator: any;
+  private oscillator!: OscillatorNode;
 
   public analyser!: {
     connect: (arg0: (_scriptProcessor: any) => void) => void;
@@ -186,7 +186,7 @@ class Tuner {
    *
    * @param {number} frequency
    */
-  play(frequency: any) {
+  playNote(frequency: number) {
     if (!this.oscillator) {
       this.oscillator = this.audioContext.createOscillator();
       this.oscillator.connect(this.audioContext.destination);
@@ -197,6 +197,7 @@ class Tuner {
   stopOscillator() {
     if (this.oscillator) {
       this.oscillator.stop();
+      // @ts-ignore
       this.oscillator = null;
     }
   }
