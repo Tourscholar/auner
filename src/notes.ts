@@ -1,17 +1,16 @@
-import { noteProps } from "./type";
+import Tuner from "./tuner";
 
 class Notes {
   public isAutoMode: boolean;
 
-  private tuner: any;
+  private tuner: Tuner;
   private root: HTMLElement | null;
   private notesList: HTMLElement | null;
   private frequency: HTMLElement | null;
   private notes: HTMLDivElement[];
-  private notesMap: { [x: string]: HTMLDivElement };
-  private dataset!: noteProps;
+  private readonly notesMap: { [x: string]: HTMLDivElement };
 
-  constructor(selector: any, tuner: any) {
+  constructor(selector: any, tuner: Tuner) {
     this.tuner = tuner;
     this.isAutoMode = true;
     this.root = document.querySelector(selector);
@@ -36,8 +35,8 @@ class Notes {
         note.dataset.name = this.tuner.noteStrings[n];
         note.dataset.value = (12 * (octave + 1) + n).toString();
         note.dataset.octave = octave.toString();
-        note.dataset.frequency = this.tuner.getStandardFrequency(
-          note.dataset.value
+        note.dataset.frequency = String(
+          this.tuner.getStandardFrequency(Number(note.dataset.value))
         );
         note.innerHTML =
           note.dataset.name ??
@@ -68,8 +67,7 @@ class Notes {
           // @ts-ignore
           $active.classList.remove("active");
         } else {
-          self.tuner.playNote(this.dataset.frequency);
-          //@ts-ignore
+          self.tuner.playNote(note.dataset.frequency);
           self.update(note.dataset);
         }
       });
@@ -91,8 +89,11 @@ class Notes {
       active.classList.remove("active");
     }
   }
-  update(note: noteProps) {
+
+  update(note: DOMStringMap) {
+    // @ts-ignore
     if (note.value in this.notesMap) {
+      // @ts-ignore
       this.active(this.notesMap[note.value]);
       this.frequency!.childNodes[0].textContent = parseFloat(
         String(note.frequency)

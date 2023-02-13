@@ -18,7 +18,7 @@ class Tuner {
 
   private semitone: number;
   private bufferSize: number;
-  private noteStrings: string[];
+  noteStrings: string[];
   private audioContext: any;
   private pitchDetector: any;
   private oscillator!: OscillatorNode;
@@ -186,13 +186,13 @@ class Tuner {
    *
    * @param {number} frequency
    */
-  playNote(frequency: number) {
+  playNote(frequency: string | undefined | number) {
     if (!this.oscillator) {
       this.oscillator = this.audioContext.createOscillator();
       this.oscillator.connect(this.audioContext.destination);
       this.oscillator.start();
     }
-    this.oscillator.frequency.value = frequency;
+    this.oscillator.frequency.value = Number(frequency);
   }
   stopOscillator() {
     if (this.oscillator) {
