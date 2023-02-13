@@ -91,6 +91,7 @@ class Application {
     requestAnimationFrame(this.updateFrequencyBars.bind(this));
   }
   update(note: noteProps) {
+    // @ts-ignore
     this.notes.update(note);
     this.meter.update((note.cents / 50) * 45);
   }
