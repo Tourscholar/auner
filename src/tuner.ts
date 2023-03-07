@@ -13,12 +13,12 @@ navigator.getUserMedia =
   navigator.mozGetUserMedia;
 
 class Tuner {
+  public bufferSize: number;
+  public noteStrings: string[];
   public middleA: number;
   public onNoteDetected: any;
 
   private semitone: number;
-  private bufferSize: number;
-  noteStrings: string[];
   private audioContext: any;
   private pitchDetector: any;
   private oscillator!: OscillatorNode;
